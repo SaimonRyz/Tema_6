@@ -1,0 +1,52 @@
+<html>
+    <head>
+       <title>Домашнее задание №6</title>
+       <script>
+        //Ввод
+        let array_original = [];
+        let array_return = [];
+       
+        //Проверка
+        let question = confirm(`Хотите ввести свою целочисленную последовательность?
+Если нажмете 'ОК' необходимо будет ввести свои значения
+Если нажмете 'Отмена' будут использованы заданные значения`);
+        if (question == true){
+            let quantity = +prompt('Введите количество элементов целочисленной последовательности', '');
+            if (isNaN(quantity)){
+                alert(`Ошибка! Вводить можно только числа! Давайте начнём с начала!)`);
+                location.reload ();
+            }
+
+            for (let j = 0; j < quantity; j++){
+                array_original.push(+prompt(`Введите ${j+1} число`, ''))
+                if (isNaN(array_original[j])){
+                    alert(`Ошибка! Вводить можно только числа. Давайте начнём с начала!)`);
+                    location.reload ();
+                    break;
+                }
+            }
+        } else {
+            array_original = [0,1,2,3,4,5,6,7,8,9];
+        }
+
+            //Решение:
+            for (let i = 0; i < array_original.length; i++){
+                if (array_original[i] % 2 == 0){
+                    array_return.push(array_original[i]);
+                } 
+            }
+
+            //Вывод:
+            if (array_return.length == 0){
+                document.write(`Была задана последовательность: ${array_original} <br \/>
+             В ней нет четных чисел`);
+            } else {
+            document.write(`Была задана последовательность: ${array_original} <br \/>
+             Был создан массив из четных чисел заданной последовательности: ${array_return}`);
+            }
+       </script>
+    </head>
+    <body>
+        <h1>Домашнее задание №6. Задание 2</h1>
+      </body>
+  </html>
