@@ -1,0 +1,75 @@
+<html>
+    <head>
+       <title>Домашнее задание №6</title>
+       
+       <script>   
+        //Ввод
+        let array_original = []
+        //Проверка ввода
+        let question = confirm(`Хотите ввести свою целочисленную последовательность? 
+Если нажмете 'ОК' необходимо будет ввести свои значения
+Если нажмете 'Отмена' будут использованы заданные значения`);
+        if (question == true){
+            let quantity = +prompt('Введите количество элементов целочисленной последовательности', '');
+            if (isNaN(quantity) || quantity < 0){
+                alert(`Ошибка! Вводить можно только положительные числа! Давайте начнём с начала!)`);
+                location.reload ();
+            }
+            for (let j = 0; j < quantity; j++){
+                array_original.push(+prompt(`Введите ${j+1} число`, ''))
+                if (isNaN(array_original[j])){
+                    alert(`Ошибка! Вводить можно только числа. Давайте начнём с начала!)`);
+                    location.reload ();
+                    break;
+                }
+            }
+        } else {
+            //Значения для проверки:
+           // array_original = [2,9,9,9,8,7,6,5,1,1,1];
+            array_original = [1,8,1,5,6,-7,8,1,-9,9,2]; 
+        }
+
+
+        //Решение:
+        document.write(`Была задана последовательность ${array_original} <br \/>`)
+        let middle = 0;
+        let X = 0;
+        let left_border = 0;
+        let right_border = 0;
+        for (let i = 1; i < array_original.length; i++){
+             X = array_original[i];
+             left_border = 0;
+             right_border = i-1;
+
+            while (left_border <= right_border){
+                middle = Math.floor((left_border + right_border) / 2);
+                if (X > array_original[middle]) {
+                    right_border = middle - 1;
+                } else {
+                    left_border = middle + 1;
+                }
+            }
+            if (left_border > right_border) {
+                for (let J = i-1; J >= left_border; J--){
+                    array_original[J+1] = array_original[J];
+                }
+                array_original[left_border] = X;
+            }
+        }
+            
+        for (let q = 0; q < array_original.length; q++){
+            if (array_original[q] < 0){
+            array_original.length = q;
+            break;
+            }
+            }
+
+        document.write(`Последовательность после сортировки: ${array_original}`);
+       </script>
+    </head>
+    <body>
+        <h1>Домашнее задание №6. Задание 4</h1>
+        <h2>Напечатать положительные числа в порядке убывания, 
+            используя метод сортировки бинарными включениями.</h2>
+      </body>
+  </html>
