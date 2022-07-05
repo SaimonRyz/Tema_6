@@ -1,0 +1,112 @@
+<html>
+    <head>
+       <title>Домашнее задание №6</title>
+       
+       <script>
+        //Получилось достаточно громоздко, но попробовал решить без методов и учесть все варианты
+        //Единственное ошибка получается, при вводе массива типа: 1,2,3,2,1
+        
+        //Ввод
+        let array_original = [];
+        let mul = 1; // Произведение чисел между мин и макс
+        let quantity = 0 // Кол-во чисел между мин и макс
+        //Проверка ввода
+        let question = confirm(`Хотите ввести свою целочисленную последовательность? 
+Если нажмете 'ОК' необходимо будет ввести свои значения
+Если нажмете 'Отмена' будут использованы заданные значения`);
+        if (question == true){
+            let quantity = +prompt('Введите количество элементов целочисленной последовательности', '');
+            if (isNaN(quantity) || quantity < 0){
+                alert(`Ошибка! Вводить можно только положительные числа! Давайте начнём с начала!)`);
+                location.reload ();
+            }
+            for (let j = 0; j < quantity; j++){
+                array_original.push(+prompt(`Введите ${j+1} число`, ''))
+                if (isNaN(array_original[j])){
+                    alert(`Ошибка! Вводить можно только числа. Давайте начнём с начала!)`);
+                    location.reload ();
+                    break;
+                }
+            }
+        } else {
+            //Значения для проверки:
+          //  array_original = [2,9,9,9,8,7,6,5,1,1,1];
+            array_original = [1,1,1,5,6,7,8,9,9,9,2]; 
+        }
+
+            //Решение:
+
+            document.write(`Была задана последовательность ${array_original} <br \/> `);
+                //Поиск минимума и максимума:
+                let max_num = Number.MIN_VALUE;
+                let max_key = 0;
+                let min_num = Number.MAX_VALUE;
+                let min_key = 0;
+                for (let i = 0; i < array_original.length; i++){
+                    if (array_original[i] > max_num){
+                        max_num = array_original[i];
+                        max_key = i;
+                    } 
+                    if (array_original[i] <= min_num){
+                        min_num = array_original[i];
+                        min_key = i;
+                    }
+                }
+
+
+                //Проверка на найденные значение и их позиции в последовательности:
+                if (max_num == min_num){
+                    document.write('Последовательность состоит из одинаковых чисел.\
+                    Нет возможности найти максимум и минимум');
+                }
+
+                else if (max_key > min_key){
+                array_original.length = max_key;
+                for (let q = min_key+1; q < array_original.length; q++){
+                    mul *= array_original[q];
+                }
+                if (mul == 1){mul = 0};
+                quantity = max_key-min_key-1;
+                if (quantity < 0){quantity = 'Ошибка'}
+                document.write(`Минимальное значение стоит на ${min_key+1} месте и равно ${min_num} <br \/> 
+                Максимальное значение стоит на ${max_key+1} месте и равно ${max_num} <br \/> 
+                Произведение элементов расположенных между максимальным и минимальным ${mul} <br \/> 
+                Количество чисел, которые находятся между максимальным и минимальным значением равно ${quantity} `);
+            } 
+            
+            //Не нашёл более удобного и легкого варианта, как просто перезадать номер места переменной:
+            else if (max_key < min_key){
+                let max_num = Number.MIN_VALUE;
+                let max_key = 0;
+                let min_num = Number.MAX_VALUE;
+                let min_key = 0;
+                for (let i = 0; i < array_original.length; i++){
+                    if (array_original[i] >= max_num){
+                        max_num = array_original[i];
+                        max_key = i;
+                    } 
+                    if (array_original[i] < min_num){
+                        min_num = array_original[i];
+                        min_key = i;
+                    }
+                }
+                array_original.length = min_key;
+                for (let q = max_key+1; q < array_original.length; q++){
+                    mul *= array_original[q];
+                }
+                if (mul == 1){mul = 0};
+                quantity = min_key-max_key-1;
+                if (quantity < 0){quantity = 'Ошибка'}
+                document.write(`Минимальное значение стоит на ${min_key+1} месте и равно ${min_num} <br \/> 
+                Максимальное значение стоит на ${max_key+1} месте и равно ${max_num} <br \/> 
+                Произведение элементов расположенных между максимальным и минимальным ${mul} <br \/> 
+                Количество чисел, которые находятся между максимальным и минимальным значением равно ${quantity} `);
+            }
+                
+
+       </script>
+    </head>
+    <body>
+        <h1>Домашнее задание №6. Задание 3</h1>
+      </body>
+  </html>
